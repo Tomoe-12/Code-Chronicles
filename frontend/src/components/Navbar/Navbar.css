@@ -1,0 +1,3 @@
+ul li a:hover {
+    @apply text-teal-600 transition-all duration-300 ease-linear
+}
