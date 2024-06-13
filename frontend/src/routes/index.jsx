@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import App from "../App";
 import Home from '../pages/Home/Home.jsx'
+import Question from "../pages/Question/Question.jsx";
 
 const index = () => {
     const router = createBrowserRouter([
@@ -14,6 +15,9 @@ const index = () => {
                 {
                     path: "/",
                     element: <Home />
+                },{
+                    path : '/question',
+                    element : <Question/>
                 }
             ]
 

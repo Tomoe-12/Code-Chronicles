@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -5,15 +6,15 @@ const Navbar = () => {
     const navList = (
         <>
             <li>
-                <a className="text-gray-500 transition text-base font-semibold " href="#"> Home </a>
+                <Link className="text-gray-500 transition text-base font-semibold " to='/' > Home </Link>
             </li>
 
             <li>
-                <a className="text-gray-500 transition text-base font-semibold" href="#"> Blog </a>
+                <Link className="text-gray-500 transition text-base font-semibold" to='/question' > Questiion </Link>
             </li>
 
             <li>
-                <a className="text-gray-500 transition text-base font-semibold " href="#"> Contact Us </a>
+                <Link className="text-gray-500 transition text-base font-semibold " to='' > Contact Us </Link>
             </li>
         </>
     )
@@ -25,8 +26,8 @@ const Navbar = () => {
             <header className=" sticky top-0 z-30 backdrop-blur-[50px]">
                 <div className="mx-auto max-w-screen-xl py-0 px-6 ">
                     <div className="flex h-16 items-center justify-between">
-                        <div className="flex-1 md:flex md:items-center md:gap-12">
-                            <a className="block text-teal-600" href="#">
+                        <div className="flex-1 md:flex md:items-center md:gap-12 ">
+                            <Link className="block text-teal-600" to='/' >
                                 <span className="sr-only">Home</span>
                                 <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -34,7 +35,7 @@ const Navbar = () => {
                                         fill="currentColor"
                                     />
                                 </svg>
-                            </a>
+                            </Link>
                         </div>
 
 
@@ -50,7 +51,7 @@ const Navbar = () => {
                                 <div className="sm:flex sm:gap-4">
                                     <a
                                         className="rounded-md outline-1 outline outline-teal-600 bg-teal-600 hover:bg-teal-700 hover:outline-teal-700 px-5 py-2.5 text-sm font-medium text-white shadow"
-                                        href="#"
+
                                     >
                                         Login
                                     </a>
@@ -58,25 +59,18 @@ const Navbar = () => {
                                     <div className="hidden sm:flex">
                                         <a
                                             className="rounded-md outline-1 outline outline-teal-600 px-5 py-2.5 text-sm font-medium text-teal-600"
-                                            href="#"
+
                                         >
                                             Register
                                         </a>
                                     </div>
                                 </div>
 
-                                <div className="block md:hidden">
-                                    <button htmlFor='my-drawer-4' className="drawer-button ">
+                             
 
-                                    </button>
-                                </div>
-
-
-                                <div className="drawer drawer-end">
-                                    <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-                                    <div className="block md:hidden drawer-contentrounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
-
-                                        <label htmlFor="my-drawer-4" className="drawer-button ">  <svg
+                                <div className="block md:hidden dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn m-1">
+                                    <label  >  <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-5 w-5"
                                             fill="none"
@@ -87,19 +81,11 @@ const Navbar = () => {
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                                         </svg></label>
                                     </div>
-                                    <div className="drawer-side z-50"  >
-
-                                        <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                                        <ul className="menu p-4 pt-0 w-80 min-h-full bg-base-200 text-base font-semibold-content">
-                                            <div className='text-end '>
-                                                <button className="btn btn-square  " onClick={() => document.getElementById('my-drawer-4').checked = false}  >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                                                </button>
-                                            </div>
-                                            {navList}
-                                        </ul>
-                                    </div>
+                                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                      {navList}
+                                    </ul>
                                 </div>
+                             
                             </div>
                         </div>
 
