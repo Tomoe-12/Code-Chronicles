@@ -1,7 +1,7 @@
 
 const Question = () => {
   const question = (
-    <div className="h-full p-4 lg:w-1/3 sm:w-1/2 md:w-1/2 w-full">
+    <div className="h-full p-4 lg:w-1/3 sm:w-1/2 md:w-1/2 w-full" >
       <div className="h-full flex flex-col justify-between bg-gray-800 bg-opacity-40 px-8  py-10 rounded-lg space-y-6 overflow-hidden text-center relative">
         <img src="" className="w-16 h-16 mx-auto mb-4 rounded-full test" alt="" />
         <h1 className=" title-font sm:text-2xl text-xl font-medium text-white mb-3"> fds fsd fds lvage Poke sdfkjslf;kjs klfjdsaflkj slkfjs;lka jslkdafj ;lksa j;l Waistcoat Godard</h1>
@@ -43,7 +43,9 @@ const Question = () => {
 
         {
           arr.map((i, item) => (
-            arr[item]
+           
+              arr[item]
+            
           ))
         }
 

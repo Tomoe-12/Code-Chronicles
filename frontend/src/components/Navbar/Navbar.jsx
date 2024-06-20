@@ -1,8 +1,23 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
-
+import { useContext } from 'react'
+import { AuthContext } from '../../../contexts/AuthContext.jsx'
+import axios from '../../helpers/axios'
 const Navbar = () => {
+    const navigate = useNavigate()
+    let { user, dispatch } = useContext(AuthContext)
+    console.log(user);
 
+    const handleLogout = () => {
+        axios.post('/api/users/logout', {
+            withCredentials: true
+        }).then((res) => {
+            if (res.status == 200) {
+                dispatch({ type: 'LOGOUT' })
+                navigate('/')
+            }
+        })
+    }
     const navList = (
         <>
             <li>
@@ -12,14 +27,8 @@ const Navbar = () => {
             <li>
                 <Link className="text-gray-500 transition text-base font-semibold" to='/question' > Questiion </Link>
             </li>
-
-            <li>
-                <Link className="text-gray-500 transition text-base font-semibold " to='' > Contact Us </Link>
-            </li>
         </>
     )
-
-
 
     return (
         <>
@@ -48,29 +57,81 @@ const Navbar = () => {
                             </nav>
 
                             <div className="flex items-center gap-4">
-                                <div className="sm:flex sm:gap-4">
-                                    <a
-                                        className="rounded-md outline-1 outline outline-teal-600 bg-teal-600 hover:bg-teal-700 hover:outline-teal-700 px-5 py-2.5 text-sm font-medium text-white shadow"
 
-                                    >
-                                        Login
-                                    </a>
 
-                                    <div className="hidden sm:flex">
-                                        <a
-                                            className="rounded-md outline-1 outline outline-teal-600 px-5 py-2.5 text-sm font-medium text-teal-600"
+                                {user ?
+                                    <>
+                                        <div className="dropdown dropdown-end">
+                                            {/* <div tabIndex={0} role="button" className="w-10 h-10 items-center justify-center border-2  border-gray-400 btn-circle avatar">
+                                <div className="w-full h-full overflow-hidden rounded-full">
+                                   
+                                    <svg className="w-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth={0} /><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" /><g id="SVGRepo_iconCarrier"> <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#000000" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" /> <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="#000000" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" /> </g></svg>
 
-                                        >
-                                            Register
-                                        </a>
-                                    </div>
                                 </div>
+                            </div> */}
+                                            <div className="flex items-center  gap-2 ">
 
-                             
+                                                <div tabIndex={0} role="button" type="button" className=" flex items-center focus:outline-none" aria-label="toggle profile dropdown">
+                                                    <div className="w-10 h-10 overflow-hidden border-2 border-gray-400 rounded-full ">
+                                                        {
+                                                            user.photoURL
+                                                                ? <img src={user.photoURL} alt={user.displayName} className="w-full h-full object-cover rounded-full" />
+                                                                :
+                                                                <svg className="object-cover w-full h-full" alt="avatar" viewBox="0 0 32.000001 32.000001" xmlns="http://www.w3.org/2000/svg" version="1.1" id="svg2" fill="#000000"><g id="SVGRepo_bgCarrier" strokeWidth={0} /><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" /><g id="SVGRepo_iconCarrier"><metadata id="metadata7"><rdf:rdf><cc:work><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /><dc:creator><cc:agent><dc:title>Timothée Giet</dc:title></cc:agent></dc:creator><dc:date>2021</dc:date><dc:description /><cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" /></cc:work><cc:license rdf:about="http://creativecommons.org/licenses/by-sa/4.0/"><cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction" /><cc:permits rdf:resource="http://creativecommons.org/ns#Distribution" /><cc:requires rdf:resource="http://creativecommons.org/ns#Notice" /><cc:requires rdf:resource="http://creativecommons.org/ns#Attribution" /><cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks" /><cc:requires rdf:resource="http://creativecommons.org/ns#ShareAlike" /></cc:license></rdf:rdf></metadata><circle r="7.5" cy="9.5" cx={16} id="path839" style={{ opacity: 1, vectorEffect: 'none', fill: '#999999', fillOpacity: 1, stroke: 'none', strokeWidth: 2, strokeLinecap: 'butt', strokeLinejoin: 'bevel', strokeMiterlimit: 4, strokeDasharray: 'none', strokeDashoffset: '3.20000005', strokeOpacity: 1 }} /><path id="rect841" d="M16 19c6.648 0 12 2.899 12 6.5V32H4v-6.5C4 21.899 9.352 19 16 19z" style={{ opacity: 1, vectorEffect: 'none', fill: '#999999', fillOpacity: 1, stroke: 'none', strokeWidth: 2, strokeLinecap: 'butt', strokeLinejoin: 'bevel', strokeMiterlimit: 4, strokeDasharray: 'none', strokeDashoffset: '3.20000005', strokeOpacity: 1 }} /></g></svg>
+                                                        }
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <ul tabIndex={0} className="menu menu-sm dropdown-content gap-1 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                                <li >
+                                                    <Link to='/profile' className="min-h-8 max-h-9 flex justify-between items-center">Profile </Link>
+                                                </li>
+
+                                                <li>
+                                                    <Link className="min-h-8 max-h-9 flex items-center  my-auto" onClick={handleLogout}>Logout</Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </>
+                                    :
+                                    < >
+
+                                        <div className="sm:flex sm:gap-4">
+                                            <Link to='/SignIn'
+                                                className="rounded-md outline-1 outline outline-teal-600 bg-teal-600 hover:bg-teal-700 hover:outline-teal-700 px-5 py-2.5 text-sm font-medium text-white shadow"
+
+                                            >
+                                                Login
+                                            </Link >
+
+                                            <div className="hidden sm:flex">
+                                                <Link to='/SignUp'
+                                                    className="rounded-md outline-1 outline outline-teal-600 px-5 py-2.5 text-sm font-medium text-teal-600"
+
+                                                >
+                                                    Register
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </>
+
+                                }
+
+
+
+
+
+
+
+
 
                                 <div className="block md:hidden dropdown dropdown-end">
                                     <div tabIndex={0} role="button" className="btn m-1">
-                                    <label  >  <svg
+                                        <label  >  <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-5 w-5"
                                             fill="none"
@@ -82,10 +143,10 @@ const Navbar = () => {
                                         </svg></label>
                                     </div>
                                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                      {navList}
+                                        {navList}
                                     </ul>
                                 </div>
-                             
+
                             </div>
                         </div>
 
