@@ -68,14 +68,14 @@ const SignUp = () => {
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
                             <div>
                                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                                <input {...register('name', { validate: validateRequired })} type="name" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  " placeholder="Kyaw Kyaw" />
+                                <input {...register('name', { validate: validateRequired })} type="name" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  focus:outline-none focus:ring-2 focus:ring-teal-600  " placeholder="Kyaw Kyaw" />
                             </div>
                             {errors.name && <div className="col-span-2 ">
                                 <p className="text-red-500 text-end  -my-5 ">{errors.name.message}</p>
                             </div>}
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                <input {...register('email', { validate: (value) => validateRequired(value) || validateEmail(value) })} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  " placeholder="name@gamil.com" />
+                                <input {...register('email', { validate: (value) => validateRequired(value) || validateEmail(value) })} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-600   " placeholder="name@gamil.com" />
                             </div>
                             {errors.email && <div className="col-span-2 ">
                                 <p className="text-red-500 text-end  -my-5 ">{errors.email.message}</p>
@@ -85,14 +85,14 @@ const SignUp = () => {
                             </div>}
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input {...register('password', { validate: (value) => validateRequired(value) || validatePassword(value) })} type="password" name="password" id="password" placeholder="Enter Your Password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  " />
+                                <input {...register('password', { validate: (value) => validateRequired(value) || validatePassword(value) })} type="password" name="password" id="password" placeholder="Enter Your Password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  focus:outline-none focus:ring-2 focus:ring-teal-600  " />
                             </div>
                             {errors.password && <div className="col-span-2 ">
                                 <p className="text-red-500 text-end   -my-5 ">{errors.password.message}</p>
                             </div>}
                             <div>
                                 <label htmlFor="conpassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                                <input {...register('conpassword', { validate: (value) => validateRequired(value) || validatePassword(value) || (value == watch('password') || 'Passwords do not match') })} type="password" name="conpassword" id="conpassword" placeholder="Enter Your  Password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  " />
+                                <input {...register('conpassword', { validate: (value) => validateRequired(value) || validatePassword(value) || (value == watch('password') || 'Passwords do not match') })} type="password" name="conpassword" id="conpassword" placeholder="Enter Your  Password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-600   " />
                             </div>
                             {errors.conpassword && <div className="col-span-2 ">
                                 <p className="text-red-500 text-end   -my-5 ">{errors.conpassword.message}</p>

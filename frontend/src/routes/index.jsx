@@ -11,6 +11,7 @@ import SignUp from "../components/SingInUP/SignUp.jsx";
 import PrivateRouter from "../PrivateRouter/PrivateRouter.jsx";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext.jsx";
+import Create from "../pages/Create/Create.jsx";
 
 
 const Index = () => {
@@ -31,11 +32,14 @@ const Index = () => {
                 }, {
                     path: '/question',
                     element: <PrivateRouter><Question /></PrivateRouter>
+                }, {
+                    path: '/create',
+                    element: <PrivateRouter><Create /></PrivateRouter>
                 }
             ]
         }, {
             path: '/SignIn',
-            element: !user ?  <SignIn /> : <Navigate to={'/'} />
+            element: !user ? <SignIn /> : <Navigate to={'/'} />
             // element:  <SignIn />
         }, {
             path: '/SignUp',

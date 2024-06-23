@@ -54,7 +54,7 @@ const Login = () => {
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium  text-white">Your email</label>
-                                <input {...register('email', { validate: (value) => validateRequired(value) || validateEmail(value) })} type="email" name="email" id="email" className=" border  sm:text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white " placeholder="name@eamil.com" />
+                                <input {...register('email', { validate: (value) => validateRequired(value) || validateEmail(value) })} type="email" name="email" id="email" className=" border  sm:text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-teal-600   " placeholder="name@eamil.com" />
                             </div>
                             {errors.email && <div className="col-span-2 ">
                                 <p className="text-red-500 text-end  -my-5 ">{errors.email.message}</p>
@@ -64,7 +64,7 @@ const Login = () => {
                             </div>}
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium  text-white">Password</label>
-                                <input {...register('password', { validate: (value) => validateRequired(value) || validatePassword(value) })} type="password" name="password" id="password" placeholder="password" className=" border   sm:text-sm rounded-lg   block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" />
+                                <input {...register('password', { validate: (value) => validateRequired(value) || validatePassword(value) })} type="password" name="password" id="password" placeholder="password" className=" border   sm:text-sm rounded-lg   block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-teal-600  " />
                             </div>
                             {errors.password && <div className="col-span-2 ">
                                 <p className="text-red-500 text-end   -my-5 ">{errors.password.message}</p>

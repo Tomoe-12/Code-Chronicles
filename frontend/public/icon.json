@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "icon": "../src/assets/Icon/CommonCategory/education.svg",
+    "name": "Education"
+  },
+  {
+    "id": 2,
+    "icon": "../src/assets/Icon/CommonCategory/entertainment.svg",
+    "name": "Entertainment"
+  },
+  {
+    "id": 3,
+    "icon": "../src/assets/Icon/CommonCategory/health.svg",
+    "name": "Health"
+  },
+  {
+    "id": 4,
+    "icon": "../src/assets/Icon/CommonCategory/love.svg",
+    "name": "Love"
+  },
+  {
+    "id": 5,
+    "icon": "../src/assets/Icon/CommonCategory/technology.svg",
+    "name": "Technology"
+  },
+  {
+    "id": 6,
+    "icon": "../src/assets/Icon/CommonCategory/business.svg",
+    "name": "Business"
+  },
+  {
+    "id": 7,
+    "icon": "../src/assets/Icon/Emotions/cry.svg",
+    "name": "Cry"
+  },
+  {
+    "id": 8,
+    "icon": "../src/assets/Icon/Emotions/exhausted.svg",
+    "name": "Exhausted"
+  },
+  {
+    "id": 9,
+    "icon": "../src/assets/Icon/Emotions/happy.svg",
+    "name": "Happy"
+  },
+  {
+    "id": 10,
+    "icon": "../src/assets/Icon/Emotions/lol.svg",
+    "name": "LoL "
+  },
+  {
+    "id": 11,
+    "icon": "../src/assets/Icon/Emotions/polerFace.svg",
+    "name": "Polar Face"
+  },
+  {
+    "id": 12,
+    "icon": "../src/assets/Icon/Emotions/think.svg",
+    "name": "Thinking"
+  },
+  {
+    "id": 13,
+    "icon": "../src/assets/Icon/ObjectsAndSymbols/flim.svg",
+    "name": "Flim"
+  },
+  {
+    "id": 14,
+    "icon": "../src/assets/Icon/ObjectsAndSymbols/music.svg",
+    "name": "Music"
+  },
+  {
+    "id": 15,
+    "icon": "../src/assets/Icon/ObjectsAndSymbols/questionMark.svg",
+    "name": "Question Mark"
+  }
+]

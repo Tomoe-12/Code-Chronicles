@@ -27,6 +27,11 @@ const Navbar = () => {
             <li>
                 <Link className="text-gray-500 transition text-base font-semibold" to='/question' > Questiion </Link>
             </li>
+
+            <li>
+                <Link className="text-gray-500 transition text-base font-semibold" to='/create' > Create </Link>
+            </li>
+
         </>
     )
 
