@@ -1,17 +1,16 @@
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm, } from "react-hook-form";
 import Validation from '../../hook/validation'
 import axios from "../../helpers/axios";
-import { useState } from "react";
-import { isNull } from "lodash";
-
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const SignUp = () => {
 
+    const { dispatch } = useContext(AuthContext)
+
     const { validateEmail, validatePassword, validateRequired } = Validation
     const naviagte = useNavigate()
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/'
     const [errorMessage, setErrorMessage] = useState(null)
     const {
         register,
@@ -22,7 +21,6 @@ const SignUp = () => {
 
     const onSubmit = async (data) => {
         let { name, email, password } = data
-
 
         let user = {
             name,
@@ -38,7 +36,8 @@ const SignUp = () => {
             setErrorMessage(null)
             if (res.status == 200) {
                 alert('sign up sucesssfully')
-                naviagte(from, { replacae: true })
+                dispatch({ type: 'LOGIN', payload: res.data.user })
+                naviagte('/')
             }
         }).catch((e) => {
             console.log(e.response.data.error);

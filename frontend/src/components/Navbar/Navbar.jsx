@@ -6,7 +6,6 @@ import axios from '../../helpers/axios'
 const Navbar = () => {
     const navigate = useNavigate()
     let { user, dispatch } = useContext(AuthContext)
-    console.log(user);
 
     const handleLogout = () => {
         axios.post('/api/users/logout', {
@@ -27,10 +26,13 @@ const Navbar = () => {
             <li>
                 <Link className="text-gray-500 transition text-base font-semibold" to='/question' > Questiion </Link>
             </li>
+            {
+                user &&
 
-            <li>
-                <Link className="text-gray-500 transition text-base font-semibold" to='/create' > Create </Link>
-            </li>
+                <li>
+                    <Link className="text-gray-500 transition text-base font-semibold" to='/create' > Create </Link>
+                </li>
+            }
 
         </>
     )

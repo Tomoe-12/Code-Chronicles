@@ -49,7 +49,7 @@ const Login = () => {
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-white">
                             Sign in to your account
-                        </h1>
+                        </h1>   
 
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
                             <div>

@@ -10,8 +10,6 @@ const login = async (req, res) => {
     try {
         let { email, password } = req.body;
         let user = await User.Login(email, password)
-        console.log('just log in user : ' + user);
-        console.log('user _id ' + user._id);
         const token = createToken(user._id)
         res.cookie('jwt', token, {
             httpOnly: true,

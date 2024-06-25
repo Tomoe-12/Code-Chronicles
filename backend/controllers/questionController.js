@@ -21,9 +21,8 @@ const all = async (req, res) => {
             page: page + 1,
             limit,
             resultQuestion,
-
         }
-        res.status(200).json('get all questions')
+        res.status(200).json(response)
 
     } catch (e) {
         res.status(500).json({ error: e.message })
@@ -31,8 +30,16 @@ const all = async (req, res) => {
 
 }
 
-const postQuestion = (req, res) => {
-    res.status(200).json('post question')
+const postQuestion = async (req, res) => {
+    const newQuestion = req.body
+    console.log(newQuestion);
+    try {
+
+        const result = await question.create(newQuestion)
+        res.status(200).json(result)
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
 }
 
 const getQuestion = (req, res) => {

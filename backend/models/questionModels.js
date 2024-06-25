@@ -8,11 +8,15 @@ const questionSchema = new Schema({
         required: true,
     },
     icon: {
-        type: String,
+        type: {
+            id : String ,
+            icon : String ,
+            name : String ,
+        },
         required: true,
     },
     body: {
-        type: String,
+        type : String ,
         required: true,
     },
     author: {

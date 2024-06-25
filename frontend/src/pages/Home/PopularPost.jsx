@@ -23,7 +23,7 @@ const PopularPost = () => {
 
                                 <div className="flex items-center  lg:space-x-2.5 space-x-3.5 ">
                                     <div className=" bg-none inline-flex items-center ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:fill-teal-600 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="teal"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:fill-red-600 cursor-pointer stroke-teal-600 hover:stroke-red-600" fill="none" viewBox="0 0 24 24" stroke="none"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                     </div>
                                     <div className="text-2xl font-semibold text-teal-600">|</div>
                                     <div className="text-teal-500 inline-flex items-center leading-none text-base space-x-1 cursor-pointer ">
@@ -51,7 +51,7 @@ const PopularPost = () => {
 
                                 <div className="flex items-center  lg:space-x-2.5 space-x-3.5 ">
                                     <div className=" bg-none inline-flex items-center ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:fill-teal-600 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="teal"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:fill-red-600 cursor-pointer stroke-teal-600 hover:stroke-red-600" fill="none" viewBox="0 0 24 24" stroke="none"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                     </div>
                                     <div className="text-2xl font-semibold text-teal-600">|</div>
                                     <div className="text-teal-500 inline-flex items-center leading-none text-base space-x-1 cursor-pointer ">
@@ -79,7 +79,7 @@ const PopularPost = () => {
 
                                 <div className="flex items-center  lg:space-x-2.5 space-x-3.5 ">
                                     <div className=" bg-none inline-flex items-center ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:fill-teal-600 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="teal"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:fill-red-600 cursor-pointer stroke-teal-600 hover:stroke-red-600" fill="none" viewBox="0 0 24 24" stroke="none"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                     </div>
                                     <div className="text-2xl font-semibold text-teal-600">|</div>
                                     <div className="text-teal-500 inline-flex items-center leading-none text-base space-x-1 cursor-pointer ">
