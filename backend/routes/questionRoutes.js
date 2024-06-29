@@ -10,11 +10,11 @@ router.delete('/deleteQuestion', QuestionControllers.deleteQuestion)
 
 // comment side
 router.get('/comments', QuestionControllers.getComments)
-router.post('/:postId/comments', QuestionControllers.addComment)
-router.post('/:postid/comments/:parentCommentId', QuestionControllers.addComment)
+router.post('/comments/:postId', QuestionControllers.addComment)
+router.post('/comments/:postId/:parentCommentId', QuestionControllers.addComment)
 
 // like post 
-router.post('/:postId/like', QuestionControllers.likeQuestion)
-router.post('/:postId/unlike', QuestionControllers.unlikeQuestion)
+router.patch('/like/:postId', QuestionControllers.likeQuestion)
+router.get('/liked-posts/:userId', QuestionControllers.likedPosts)
 
 module.exports = router

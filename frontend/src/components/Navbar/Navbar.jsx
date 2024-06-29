@@ -1,11 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../../contexts/AuthContext.jsx'
 import axios from '../../helpers/axios'
 const Navbar = () => {
     const navigate = useNavigate()
     let { user, dispatch } = useContext(AuthContext)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        if (user) {
+            setLoading(false)
+        }
+    }, [user])
 
     const handleLogout = () => {
         axios.post('/api/users/logout', {
@@ -64,9 +71,14 @@ const Navbar = () => {
                             </nav>
 
                             <div className="flex items-center gap-4">
+                                {
+                                    loading && (
+                                        <div className="animate-pulse">Loading...</div>
+                                    )
+                                       
+                                }
 
-
-                                {user ?
+                                {!loading && user ?
                                     <>
                                         <div className="dropdown dropdown-end">
                                             {/* <div tabIndex={0} role="button" className="w-10 h-10 items-center justify-center border-2  border-gray-400 btn-circle avatar">
@@ -105,36 +117,31 @@ const Navbar = () => {
                                         </div>
                                     </>
                                     :
-                                    < >
-
-                                        <div className="sm:flex sm:gap-4">
-                                            <Link to='/SignIn'
-                                                className="rounded-md outline-1 outline outline-teal-600 bg-teal-600 hover:bg-teal-700 hover:outline-teal-700 px-5 py-2.5 text-sm font-medium text-white shadow"
-
-                                            >
-                                                Login
-                                            </Link >
-
-                                            <div className="hidden sm:flex">
-                                                <Link to='/SignUp'
-                                                    className="rounded-md outline-1 outline outline-teal-600 px-5 py-2.5 text-sm font-medium text-teal-600"
+                                    <>
+                                        {
+                                            !loading &&
+                                            <div className="sm:flex sm:gap-4">
+                                                <Link to='/SignIn'
+                                                    className="rounded-md outline-1 outline outline-teal-600 bg-teal-600 hover:bg-teal-700 hover:outline-teal-700 px-5 py-2.5 text-sm font-medium text-white shadow"
 
                                                 >
-                                                    Register
-                                                </Link>
+                                                    Login
+                                                </Link >
+
+                                                <div className="hidden sm:flex">
+                                                    <Link to='/SignUp'
+                                                        className="rounded-md outline-1 outline outline-teal-600 px-5 py-2.5 text-sm font-medium text-teal-600"
+
+                                                    >
+                                                        Register
+                                                    </Link>
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
+
                                     </>
 
                                 }
-
-
-
-
-
-
-
-
 
                                 <div className="block md:hidden dropdown dropdown-end">
                                     <div tabIndex={0} role="button" className="btn m-1">

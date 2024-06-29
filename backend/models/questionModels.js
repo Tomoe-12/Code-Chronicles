@@ -30,10 +30,6 @@ const questionSchema = new Schema({
             ref: 'User',
         }
     ],
-    likeCount: {
-        type: Number,
-        default: 0,
-    },
     comments: [
         {
             type: Schema.Types.ObjectId,

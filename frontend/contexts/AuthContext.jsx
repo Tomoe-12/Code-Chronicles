@@ -25,6 +25,7 @@ const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         const authFun = () => {
+          
                 axios.get('/api/users/me').then(res => {
                     let user = res.data;
                     if (user) {
@@ -41,7 +42,7 @@ const AuthContextProvider = ({ children }) => {
     }, [])
     return (
         <AuthContext.Provider value={{ ...state, dispatch }}>
-             {state.loading ? <div>Loading...</div> : children}
+            {children}
         </AuthContext.Provider>
     )
 }

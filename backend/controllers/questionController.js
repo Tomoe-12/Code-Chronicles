@@ -1,4 +1,5 @@
-const question = require('../models/questionModels')
+const { default: mongoose } = require('mongoose');
+const Question = require('../models/questionModels')
 
 const all = async (req, res) => {
     try {
@@ -11,9 +12,9 @@ const all = async (req, res) => {
         const sortBy = {}
         sortBy[sortOptions[0]] = sortOptions[1] || 'asc'
 
-        const resultQuestion = await jobs.find({}).sort(sortBy).skip(page * limit).limit(limit)
+        const resultQuestion = await Question.find({}).sort(sortBy).skip(page * limit).limit(limit)
 
-        const total = await question.countDocuments({})
+        const total = await Question.countDocuments({})
 
         const response = {
             error: false,
@@ -25,7 +26,7 @@ const all = async (req, res) => {
         res.status(200).json(response)
 
     } catch (e) {
-        res.status(500).json({ error: e.message })
+        res.status(500).json({ error: 'error at getting all jobs' + e.message })
     }
 
 }
@@ -35,7 +36,7 @@ const postQuestion = async (req, res) => {
     console.log(newQuestion);
     try {
 
-        const result = await question.create(newQuestion)
+        const result = await Question.create(newQuestion)
         res.status(200).json(result)
     } catch (e) {
         res.status(500).json({ error: e.message })
@@ -50,12 +51,58 @@ const deleteQuestion = (req, res) => {
     res.status(200).json('delete question')
 }
 
-const likeQuestion = (req, res) => {
-    res.status(200).json('like question')
+const likeQuestion = async (req, res) => {
+    try {
+        let id = req.params.postId;
+        let userId = req.body.userId
+
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ msg: 'not a valid id' })
+        }
+
+        let question = await Question.findById(id);
+        if (!question) {
+            return res.status(404).json({ msg: 'Question not found' });
+        }
+
+        console.log(question);
+
+        // check if the user has already liked the question
+        const hasLiked = question.likes.includes(userId);
+        console.log(hasLiked);
+        // like and unlike the question
+        if (hasLiked) {
+            console.log('enter inng true hasliked ');
+            question.likes = question.likes.filter((like) => { console.log('like' + like + '\n userid' + userId); like.toString() != userId })
+        } else {
+            // add the user Id to the likes array
+            question.likes.push(userId)
+            console.log('enter push user id in the array');
+        }
+        await question.save();
+
+        return res.status(200).json({ likes: question.likes.length });
+
+    } catch (e) {
+        return res.status(500).json({ error: 'internet server error' });
+    }
 }
 
-const unlikeQuestion = (req, res) => {
-    res.status(200).json('unlike question')
+const likedPosts = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ msg: 'not a valid user Id' })
+        }
+
+        const likedPosts = await Question.find({ likes: userId });
+
+        return res.status(200).json(likedPosts)
+    } catch (e) {
+        return res.status(500).json({ error: 'internet server error' });
+    }
 }
 
 const addComment = (req, res) => {
@@ -78,7 +125,7 @@ module.exports = {
     getQuestion,
     deleteQuestion,
     likeQuestion,
-    unlikeQuestion,
+    likedPosts,
     addComment,
     getComments,
     deleteComment,
