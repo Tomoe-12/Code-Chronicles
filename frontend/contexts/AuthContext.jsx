@@ -17,29 +17,31 @@ let AuthReducer = (state, action) => {
 }
 
 const AuthContextProvider = ({ children }) => {
-    const [loading , setLoading ] = useState(true)
+    const [loading, setLoading] = useState(true)
     let [state, dispatch] = useReducer(AuthReducer, {
         user: null,
-        loading 
+        loading
     })
 
     useEffect(() => {
-        const authFun = () => {
-          
-                axios.get('/api/users/me').then(res => {
-                    let user = res.data;
-                    if (user) {
-                        dispatch({ type: 'LOGIN', payload: user })
-                    } else {
-                        dispatch({ type: 'LOGOUT' })
-                    }
-                }).catch((error)=>{
-                    dispatch({ type: 'LOGOUT' })
-                })
-             setLoading(false)
-        }
-        authFun()
-    }, [])
+        const authFun = async () => {
+            try {
+                const res = await axios.get("/api/users/me");
+                const user = res.data;
+                if (user) {
+                    dispatch({ type: "LOGIN", payload: user });
+                } else {
+                    dispatch({ type: "LOGOUT" });
+                }
+            } catch (error) {
+                dispatch({ type: "LOGOUT" });
+            } finally {
+                setLoading(false);
+            }
+        };
+        authFun();
+    }, []);
+    
     return (
         <AuthContext.Provider value={{ ...state, dispatch }}>
             {children}

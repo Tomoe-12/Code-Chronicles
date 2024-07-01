@@ -5,15 +5,8 @@ import { AuthContext } from '../../../contexts/AuthContext.jsx'
 import axios from '../../helpers/axios'
 const Navbar = () => {
     const navigate = useNavigate()
-    let { user, dispatch } = useContext(AuthContext)
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        if (user) {
-            setLoading(false)
-        }
-    }, [user])
-
+    let { user, dispatch ,loading } = useContext(AuthContext)
+  
     const handleLogout = () => {
         axios.post('/api/users/logout', {
             withCredentials: true
