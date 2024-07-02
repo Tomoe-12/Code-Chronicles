@@ -39,11 +39,11 @@ const Navbar = () => {
 
     return (
         <>
-            <header className=" sticky top-0 z-30 backdrop-blur-[50px]">
-                <div className="mx-auto max-w-screen-xl py-0 px-6 ">
-                    <div className="flex h-16 items-center justify-between">
+            <header className=" sticky top-0 z-30 backdrop-blur-[50px]  w-full">
+                <div className="mx-auto max-w-screen-xl py-0  md:px-6 px-2 ">
+                    <div className="flex h-16 items-center justify-between ">
                         <div className="flex-1 md:flex md:items-center md:gap-12 ">
-                            <Link className="block text-teal-600" to='/' >
+                            <Link className="block text-teal-600 " to='/' >
                                 <span className="sr-only">Home</span>
                                 <svg className="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -56,14 +56,14 @@ const Navbar = () => {
 
 
 
-                        <div className="md:flex md:items-center md:gap-12">
+                        <div className="md:flex md:items-center md:gap-12 ">
                             <nav aria-label="Global" className="hidden md:block">
                                 <ul className="flex items-center gap-6 text-sm">
                                     {navList}
                                 </ul>
                             </nav>
 
-                            <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-4 ">
                                 {
                                     loading && (
                                         <div className="animate-pulse">Loading...</div>

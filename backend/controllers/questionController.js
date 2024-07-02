@@ -33,7 +33,6 @@ const all = async (req, res) => {
 
 const postQuestion = async (req, res) => {
     const newQuestion = req.body
-    console.log(newQuestion);
     try {
 
         const result = await Question.create(newQuestion)
@@ -66,19 +65,15 @@ const likeQuestion = async (req, res) => {
             return res.status(404).json({ msg: 'Question not found' });
         }
 
-        console.log(question);
 
         // check if the user has already liked the question
         const hasLiked = question.likes.includes(userId);
-        console.log(hasLiked);
         // like and unlike the question
         if (hasLiked) {
-            console.log('enter inng true hasliked ');
-            question.likes = question.likes.filter((like) => { console.log('like' + like + '\n userid' + userId); like.toString() != userId })
+            question.likes = question.likes.filter((like) => { like.toString() != userId })
         } else {
             // add the user Id to the likes array
             question.likes.push(userId)
-            console.log('enter push user id in the array');
         }
         await question.save();
 

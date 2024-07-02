@@ -3,7 +3,6 @@ const  User  = require('../models/userModels')
 
 const AuthMiddleware = (req, res, next) => {
     const token = req.cookies.jwt
-    console.log('token',token);
     if (token) {
         jwt.verify(token, process.env.JWT_SECRET, (err, decodedValue) => {
             if (err) {

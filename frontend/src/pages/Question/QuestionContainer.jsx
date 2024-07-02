@@ -3,11 +3,9 @@ import axios from '../../helpers/axios'
 import { AuthContext } from '../../../contexts/AuthContext.jsx'
 const QuestionContainer = ({ questions }) => {
     const { user } = useContext(AuthContext)
-    console.log(questions);
     const [likes, setLikes] = useState({})
     const [likeCount, setLikeCounts] = useState(0)
 
-    console.log(user);
 
     useEffect(() => {
         if (user) {
@@ -25,7 +23,6 @@ const QuestionContainer = ({ questions }) => {
                     setLikes(initialLikes);
                     setLikeCounts(initialLikeCounts);
                 }).catch((e) => {
-                    console.log(e);
                 });
         }
     }, [user, questions]);
@@ -42,7 +39,7 @@ const QuestionContainer = ({ questions }) => {
             setLikes((prevLikes) => ({ ...prevLikes, [postId]: !prevLikes[postId] }))
             setLikeCounts(prevCounts => ({ ...prevCounts, [postId]: prevCounts[postId] + (isLiked ? -1 : 1) }));
         }).catch((e) => {
-            console.log('error at giving like ' + e);
+            console.log(e);
         })
 
     }
@@ -55,13 +52,12 @@ const QuestionContainer = ({ questions }) => {
                         <div className="h-full flex flex-col justify-between bg-gray-800 bg-opacity-40 px-8  py-5 rounded-lg space-y-6 overflow-hidden text-center relative">
 
                             <div className=" flex items-center justify-between ">
-                                <div className=" w-[75%] h-full flex items-center space-x-3 justify-start">
-                                    <img src={question.icon.icon} className="w-16 h-16 rounded-full " alt={question.icon.name} />
+                                <div className=" w-full h-full flex items-center  space-x-3 justify-start">
+                                    <div className=" ">
+                                        <img src={question.icon.icon} className="min-w-16 min-h-16  " alt={question.icon.name} />
+                                    </div>
                                     <p className="text-start">{question.title}</p>
 
-                                </div>
-                                <div className=" w-[25%] text-end">
-                                    <p>1 day ago </p>
                                 </div>
                             </div>
 
@@ -70,15 +66,18 @@ const QuestionContainer = ({ questions }) => {
 
                             </div>
 
-                            <div className=" flex items-center justify-between ">
-                                <div className=" w-1/2 h-full flex items-center space-x-3 justify-start">
-                                    <img src="" className="w-10 h-10   rounded-full test" alt="" />
-                                    <p>lsadfjsldfj ;</p>
+                            <div className=" flex items-center   ">
+                                <div className=" w-full  h-full flex items-center space-x-3 justify-start">
+                                    <img src="" className="min-w-10 h-10 test rounded-full " alt="" />
+                                  <div>
+                                  <p className="text-start">Mg Zayar Lin Htun htun </p>
+                                  <p className="text-xs text-start">1 day ago </p>
+                                  </div>
 
                                 </div>
 
                                 {/* give like and comment  */}
-                                <div className=" w-1/2 flex items-center justify-end text-end ">
+                                <div className=" w-1/3  flex items-center justify-end text-end ">
                                     <div className="flex items-center   lg:space-x-2 space-x-3 ">
                                         <div className=" bg-none inline-flex items-center space-x-1 text-teal-600 ">
                                             <button onClick={() => giveLike(question)}>

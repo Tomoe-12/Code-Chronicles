@@ -12,11 +12,15 @@ import PrivateRouter from "../PrivateRouter/PrivateRouter.jsx";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext.jsx";
 import Create from "../pages/Create/Create.jsx";
-
-
+import Profile from '../pages/Profile/profile.jsx'
+import Loading from '../components/Loading/loading.jsx'
 const Index = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, loading } = useContext(AuthContext)
+
+    if (loading) {
+        return <div> <Loading/> </div>
+    }
 
     const router = createBrowserRouter([
         {
@@ -35,7 +39,11 @@ const Index = () => {
                 }, {
                     path: '/create',
                     element: <PrivateRouter><Create /></PrivateRouter>
-                }
+                },{
+                    path: '/profile',
+                    element: user ? <Profile /> : <Navigate to={'/'} />
+                    // element: <\Profile />
+                },
             ]
         }, {
             path: '/SignIn',
@@ -45,7 +53,7 @@ const Index = () => {
             path: '/SignUp',
             element: !user ? <SignUp /> : <Navigate to={'/'} />
             // element: <SignUp />
-        }
+        }, 
 
     ]);
 

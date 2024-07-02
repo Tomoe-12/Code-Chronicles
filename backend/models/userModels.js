@@ -50,7 +50,6 @@ UserSchema.statics.Register = async function (name, email, password) {
         email,
         password: hashValue
     });
-    console.log('register user : ' + user);
     return user;
 }
 

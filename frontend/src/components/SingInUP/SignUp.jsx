@@ -27,7 +27,6 @@ const SignUp = () => {
             email,
             password,
         }
-        console.log(user);
 
 
         await axios.post('/api/users/register', user, {
