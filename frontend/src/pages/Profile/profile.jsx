@@ -10,7 +10,6 @@ const Profile = () => {
         handleSubmit,
         formState: { errors },
     } = useForm()
-
     const onSubmit = (data) => {
         let name = data.name
         let email = data.email

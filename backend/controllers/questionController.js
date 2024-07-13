@@ -3,16 +3,19 @@ const Question = require('../models/questionModels')
 
 const all = async (req, res) => {
     try {
-
         const page = parseInt(req.query.page) - 1 || 0;
         const limit = parseInt(req.query.limit) || 9;
-        let sort = req.query.sort || "rating";
+        let sort = req.query.sort || "createdAt,desc";
 
         const sortOptions = sort.split(',');
         const sortBy = {}
         sortBy[sortOptions[0]] = sortOptions[1] || 'asc'
 
-        const resultQuestion = await Question.find({}).sort(sortBy).skip(page * limit).limit(limit)
+        const resultQuestion = await Question.find({})
+        .populate('author','photoURL name')
+        .sort(sortBy)
+        .skip(page * limit)
+        .limit(limit)
 
         const total = await Question.countDocuments({})
 
@@ -100,18 +103,74 @@ const likedPosts = async (req, res) => {
     }
 }
 
-const addComment = (req, res) => {
-    res.status(200).json('add comment')
-}
 
-const getComments = (req, res) => {
-    res.status(200).json('get all comments ')
-}
+// Get all comments
+const allComments = async (req, res) => {
+    try {
+        const comments = await Comment.find();
+        res.status(200).json(comments);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
 
-const deleteComment = (req, res) => {
-    res.status(200).json('delete comment')
-}
+// Add a new comment
+const addNewComment = async (req, res) => {
+    try {
+        const { postId } = req.params; // Assuming postId is passed in the URL params
+        const { body, author } = req.body;
 
+        const newComment = new Comment({
+            question: postId, // Assuming postId is the question id
+            author,
+            body,
+        });
+
+        const savedComment = await newComment.save();
+        res.status(201).json(savedComment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+// Edit a comment
+const editComment = async (req, res) => {
+    try {
+        const { commentId } = req.params;
+        const { body } = req.body;
+
+        const updatedComment = await Comment.findByIdAndUpdate(commentId, { body }, { new: true });
+
+        if (!updatedComment) {
+            return res.status(404).json({ error: 'Comment not found' });
+        }
+
+        res.json(updatedComment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+// Delete a comment
+const deleteComment = async (req, res) => {
+    try {
+        const { commentId } = req.params;
+
+        const deletedComment = await Comment.findByIdAndDelete(commentId);
+
+        if (!deletedComment) {
+            return res.status(404).json({ error: 'Comment not found' });
+        }
+
+        res.json({ message: 'Comment deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
 
 
 module.exports = {
@@ -121,7 +180,8 @@ module.exports = {
     deleteQuestion,
     likeQuestion,
     likedPosts,
-    addComment,
-    getComments,
+    allComments,
+    addNewComment,
+    editComment,
     deleteComment,
 }

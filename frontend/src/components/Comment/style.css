@@ -1,0 +1,91 @@
+* {
+  font-family: Monaco, sans-serif;
+}
+
+.commentContainer {
+  margin-top: 10px;
+  background-color: ;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  @apply w-fit max-w-96 rounded-lg 
+}
+
+/* .commentContainer:hover {
+  background-color: #d3d3d3bf;
+} */
+
+.inputContainer {
+  display: flex;
+  gap: 15px;
+  @apply justify-between
+}
+
+.inputContainer > span {
+  margin-top: 5px;
+}
+
+.inputContainer__input {
+  margin: 6px 0 0px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #e7e7e7;
+  @apply border w-full px-5 py-2 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-600 rounded-lg border-gray-600 placeholder-gray-400 text-white
+}
+
+.first_input {
+  margin: 0;
+}
+
+.commentContainer > span {
+  margin: 0 5px;
+}
+
+.reply {
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  display:flex;
+  gap:5px;
+  justify-content : center ;
+  align-items : center ;
+  @apply text-gray-500
+}
+
+.comment {
+  color: #ffffff;
+  letter-spacing: 0.8px;
+  @apply  min-w-24 h-10 rounded-xl bg-teal-600 hover:bg-teal-700 flex items-center justify-center
+}
+
+.edit {
+  @apply  min-w-16 h-8 rounded-xl bg-teal-600 hover:bg-teal-700 text-white
+}
+
+
+.error {
+  border: 1px solid red;
+}
+
+
+
+
+.nested-comment {
+  position: relative;
+  padding-left: 20px; /* Adjust this to control the indentation */
+}
+
+.nested-comment::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background-color: gray; /* Adjust the color of the line */
+}

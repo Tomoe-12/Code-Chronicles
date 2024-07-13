@@ -12,7 +12,7 @@ const Question = () => {
   let location = useLocation()
   let searchQuery = new URLSearchParams(location.search)
   const [obj, setObj] = useState({})
-  const [sort, setSort] = useState({ sort: 'rating', order: 'desc' })
+  const [sort, setSort] = useState({ sort: 'createdAt', order: 'desc' })
   const [page, setPage] = useState(searchQuery.get('page') || 1);
   
   let limit = 12;
@@ -23,9 +23,11 @@ const Question = () => {
   }
 
   const getAllJobs = useCallback(async () => {
+    
     try {
       const { data } = await axios(`/api/questions?page=${page}&limit=${limit}&sort=${sort.sort},${sort.order}`)
       setObj(data)
+      console.log(data);
     } catch (error) {
       console.error('error fetching data : ', error);
     }
