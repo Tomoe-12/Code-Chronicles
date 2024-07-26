@@ -46,9 +46,8 @@ const QuestionContainer = ({ questions }) => {
         })
 
     }
-
+    <Comment question={selectedQuestion} />
     const openComment = (question) => {
-        console.log(question);
         setSelectedQuestion(question)
         document.getElementById('my_modal_2').showModal();
     }
@@ -121,9 +120,12 @@ const QuestionContainer = ({ questions }) => {
 
                 ))
             }
-
-            <Comment question={selectedQuestion} />
-
+            <dialog id="my_modal_2" className="modal">
+                {
+                    selectedQuestion &&
+                    <Comment question={selectedQuestion} />
+                }
+            </dialog>
         </div>
     )
 }

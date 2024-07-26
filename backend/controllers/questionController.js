@@ -1,5 +1,6 @@
 const { default: mongoose } = require('mongoose');
 const Question = require('../models/questionModels')
+const Comment = require('../models/comments')
 
 const all = async (req, res) => {
     try {
@@ -12,10 +13,10 @@ const all = async (req, res) => {
         sortBy[sortOptions[0]] = sortOptions[1] || 'asc'
 
         const resultQuestion = await Question.find({})
-        .populate('author','photoURL name')
-        .sort(sortBy)
-        .skip(page * limit)
-        .limit(limit)
+            .populate('author', 'photoURL name')
+            .sort(sortBy)
+            .skip(page * limit)
+            .limit(limit)
 
         const total = await Question.countDocuments({})
 
@@ -37,7 +38,6 @@ const all = async (req, res) => {
 const postQuestion = async (req, res) => {
     const newQuestion = req.body
     try {
-
         const result = await Question.create(newQuestion)
         res.status(200).json(result)
     } catch (e) {
@@ -104,10 +104,24 @@ const likedPosts = async (req, res) => {
 }
 
 
-// Get all comments
+// Get all comments for each question
 const allComments = async (req, res) => {
+    let id = req.params.postId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ msg: 'not a valid id' })
+    }
+
+    let question = await Question.findById(id);
+    if (!question) {
+        return res.status(404).json({ msg: 'Question not found' });
+    }
+    console.log('question : ', question);
+
     try {
-        const comments = await Comment.find();
+        const comments = await Comment.find({ questionId: id })
+            .populate('author', 'photoURL name')
+
+        console.log('comment at backend : ', comments);
         res.status(200).json(comments);
     } catch (error) {
         console.error(error);
@@ -119,16 +133,32 @@ const allComments = async (req, res) => {
 const addNewComment = async (req, res) => {
     try {
         const { postId } = req.params; // Assuming postId is passed in the URL params
-        const { body, author } = req.body;
-
+        const { body, author ,parentComment : parentCommentId } = req.body;
         const newComment = new Comment({
-            question: postId, // Assuming postId is the question id
-            author,
-            body,
+            questionId: req.params.postId,
+            author: req.body.author,
+            body: req.body.body,
+            parentComment: req.body.parentComment,
         });
 
+        console.log('add comments : ', req.body);
+        console.log('post id :', postId);
+        console.log('newComment : :', newComment);
+
+
+
+        await newComment.save();
+        if (parentCommentId) {
+            newComment.parentComment = parentCommentId;
+            await Comment.findByIdAndUpdate(parentCommentId, {
+                $push: { items : newComment }
+            });
+        }
+        await Question.findByIdAndUpdate(req.params.postId, {
+            $push: { comments: newComment._id }
+        });
         const savedComment = await newComment.save();
-        res.status(201).json(savedComment);
+        res.status(201).json(newComment);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });

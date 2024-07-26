@@ -9,7 +9,7 @@ router.get('/singleQuestion', QuestionControllers.getQuestion)
 router.delete('/deleteQuestion', QuestionControllers.deleteQuestion)
 
 // comment side
-router.get('/comments',QuestionControllers.allComments)
+router.get('/comments/:postId',QuestionControllers.allComments)
 router.post('/comments/:postId',QuestionControllers.addNewComment)
 router.patch('/comments/:commentId',QuestionControllers.editComment)
 router.delete('/comments/:commentId',QuestionControllers.deleteComment)

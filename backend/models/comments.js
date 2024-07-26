@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 const commentSchema = new Schema({
-    question: {
+    questionId: {
         type: Schema.Types.ObjectId,
         ref: 'Question',
         required: true,
@@ -21,6 +21,11 @@ const commentSchema = new Schema({
         ref: 'Comment',
         default: null,
     },
+    items:{
+        type :Array,
+        default : null ,
+    },
+    createdAt: { type: Date, default: Date.now },
 }, { timestamps: true })
 
 const Comment = mongoose.model('Comment',commentSchema)
