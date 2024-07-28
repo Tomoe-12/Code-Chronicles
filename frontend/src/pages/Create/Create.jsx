@@ -4,10 +4,16 @@ import IconSelect from './IconSelect'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../../contexts/AuthContext'
 import axios from '../../helpers/axios'
+import { useLocation, useNavigate } from "react-router-dom"
+import FileUploader from '../../components/Create/FileUploader'
 
 const Create = () => {
+    const navigate = useNavigate()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const { user } = useContext(AuthContext)
     const [loading, setLoading] = useState(false)
+    const [files, setFiles] = useState([]);
     const { validateRequired } = Validation
     const {
         register,
@@ -29,6 +35,7 @@ const Create = () => {
         }).then((res) => {
             if (res.status == 200) {
                 alert('post successfully ')
+                navigate(from, { replace: true })
             }
         }).catch((e) => {
             alert('Something wrong Plz try again')
@@ -73,17 +80,20 @@ const Create = () => {
                         </div>
                     </div>
 
-                    <div className=''>
-                        <label htmlFor="message" className="block  mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Question</label>
-                        <textarea {...register('message', { validate: (value) => validateRequired(value) })} id="message" rows={10} className="max-h-[450px] min-h-36 block p-2.5 w-full text-base rounded-lg border focus:outline-none focus:ring-2 focus:ring-teal-600  border-gray-600 bg-gray-700 text-white" placeholder="Write your Question here..." defaultValue={""} />
-
+                    <div className="my-4">
+                        <FileUploader files={files} onChange={setFiles} />
                     </div>
+
+                    <>
+                        <label htmlFor="message" className="block  mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Question</label>
+                        <textarea {...register('message', { validate: (value) => validateRequired(value) })} id="message" rows={10} className=" min-h-36 block p-2.5 w-full text-base rounded-lg border focus:outline-none focus:ring-2 focus:ring-teal-600  border-gray-600 bg-gray-700 text-white" placeholder="Write your Question here..." defaultValue={""} />
+
+                    </>
                     {errors.message && <div className="col-span-2 ">
                         <p className="text-red-500 text-end  -my-5 ">{errors.message.message}</p>
                     </div>}
-                    <div>
-                        <button type="submit" className="w-full  text-white mt-3  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-700  ">Create</button>
-                    </div>
+
+                    <button type="submit" className="w-full  text-white mt-3  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-700  ">Create</button>
 
                 </form>
             </div >

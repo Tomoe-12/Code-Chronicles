@@ -1,0 +1,15 @@
+.text-14-regular {
+  @apply sm:text-sm text-xl  leading-[18px] font-normal;
+}
+
+.text-12-regular {
+    @apply sm:text-sm text-base leading-[16px] font-normal;
+  }
+
+.file-upload {
+  @apply text-12-regular flex cursor-pointer  flex-col items-center justify-center gap-3 rounded-md border  border-gray-600 bg-gray-700  p-5;
+} 
+
+.file-upload_label {
+  @apply flex flex-col justify-center gap-2 text-center text-black;
+}
