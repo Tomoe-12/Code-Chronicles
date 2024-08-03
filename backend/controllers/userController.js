@@ -42,6 +42,15 @@ const register = async (req, res) => {
     }
 }
 
+const updateProfile = async (req, res) => {
+    console.log(req.body);
+
+    try {
+        return res.status(200).json(req.body)
+    } catch (e) {
+        return res.status(400).json({ error: e.message })
+    }
+}
 
 const logout = async (req, res) => {
     res.cookie('jwt', '', {
@@ -57,4 +66,5 @@ module.exports = {
     login,
     register,
     logout,
+    updateProfile
 }

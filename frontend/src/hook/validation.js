@@ -7,6 +7,9 @@ const ValidationProperty = {
   },
 
   validateEmail: (value) => {
+    if(value == ''){
+      return undefined
+    }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(value)) {
       return 'Invalid email format ! ';

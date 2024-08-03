@@ -18,6 +18,8 @@ router.post('/register', [
     body('password').notEmpty(),
 ], handleErrorMessage, UserControllers.register,)
 
+router.patch('/updateProfile/:userId',UserControllers.updateProfile)
+
 router.post('/logout', UserControllers.logout)
 
 module.exports = router

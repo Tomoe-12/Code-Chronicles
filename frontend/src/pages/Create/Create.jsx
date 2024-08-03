@@ -81,7 +81,7 @@ const Create = () => {
                     </div>
 
                     <div className="my-4">
-                        <FileUploader files={files} onChange={setFiles} />
+                        <FileUploader files={files} onChange={setFiles}  />
                     </div>
 
                     <>
