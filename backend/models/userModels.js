@@ -9,7 +9,7 @@ const UserSchema = new Schema({
         required: true,
     },
     photoURL: {
-        type: Buffer,
+       data : String ,
     },
     email: {
         type: String,

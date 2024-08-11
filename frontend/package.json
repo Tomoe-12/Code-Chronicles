@@ -13,6 +13,7 @@
     "@headlessui/react": "^2.1.0",
     "@heroicons/react": "^2.1.4",
     "alpinejs": "^3.14.0",
+    "appwrite": "^15.0.0",
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
     "heroicons": "^2.1.4",

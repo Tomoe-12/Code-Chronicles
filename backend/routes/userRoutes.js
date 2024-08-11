@@ -5,6 +5,11 @@ const AuthMiddlewre = require('../middlewares/AuthMiddleware')
 const handleErrorMessage = require('../middlewares/handleErrorMessage')
 const { body } = require('express-validator')
 
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+
 router.get('/me', AuthMiddlewre, UserControllers.me)
 
 router.post('/login', [
@@ -18,7 +23,7 @@ router.post('/register', [
     body('password').notEmpty(),
 ], handleErrorMessage, UserControllers.register,)
 
-router.patch('/updateProfile/:userId',UserControllers.updateProfile)
+router.patch('/updateProfile/:userId', upload.single('file'), UserControllers.updateProfile)
 
 router.post('/logout', UserControllers.logout)
 

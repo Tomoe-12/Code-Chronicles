@@ -8,11 +8,13 @@ import axios from '../../helpers/axios'
 
 const Profile = () => {
 
-    const { user, updateUserProfile } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [update, setUpdate] = useState(false)
     const [files, setFiles] = useState([]);
     const { validateEmail } = Validation
-    console.log(files);
+
+    // console.log('user , ::: ', user);
+
 
     const {
         register,
@@ -20,40 +22,53 @@ const Profile = () => {
         formState: { errors },
     } = useForm()
 
-
-    const convertFileToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    }
+    console.log(files[0]?.name);
 
 
     const onSubmit = async (data) => {
-        
-        const base64Files = await Promise.all(
-            files.map((file) => convertFileToBase64(file))
-        )
+        console.log(files[0]);
 
-        data = { ...data, 'photoURL': base64Files }
-        let name = data.name
-        let email = data.email
-        let photoURL = data.photoURL
+        let formData;
+        let blobFile;
+        if (files && files.length > 0) {
+            blobFile = new Blob([files[0]])
+            console.log('blbo ifle : ', blobFile);
+            
+            formData = new FormData();
+            formData.append('file', files[0])
+            formData.append('name', data.name)
+            formData.append('email', data.email)
+            formData.append('fileName', files[0].name)
+        }
 
+        // Log the formData entries
+        for (const [key, value] of formData.entries()) {
+            if (value instanceof Blob) {
+                console.log(`${key}: Blob`);
+            } else {
+                console.log(`${key}:`, value);
+            }
+        }
+        try {
 
-        axios.patch('/api/users//updateProfile/' + user._id, data)
-            .then((result) => {
-                console.log(result);
-                alert('Update sucessfully')
-            }).catch((error) => {
-                alert('sth went wrong')
-                console.log(error);
-
+            axios.patch(`api/users/updateProfile/${user._id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             })
-        
+                .then((result) => {
+                    console.log(result);
+                    alert('Update successfully')
+                }).catch((error) => {
+                    console.log(error);
+                    alert('sth went wrong')
+                })
 
+
+        } catch (error) {
+            console.log('error :', error);
+        }
+        console.log('data :::: ', data);
 
     }
     const updateChange = () => {
@@ -95,11 +110,10 @@ const Profile = () => {
 
                             </div>
 
-                            <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col gap-0">
+                            <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col gap-0" >
                                 {/* Profile Image */}
 
                                 <div className="mt-10 flex justify-center  ">
-
                                     <ProfilePhoto user={user} update={update} files={files} onChange={setFiles} />
 
                                 </div>

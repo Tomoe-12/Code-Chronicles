@@ -10,16 +10,17 @@ const questionRoutes = require('./routes/questionRoutes')
 const { default: mongoose } = require('mongoose');
 const cookieParser = require('cookie-parser');
 
-
 const app = express()
 
 app.use(cors({
-    origin: 'http://localhost:5173' ,// Or use '*' to allow all origins
+    origin: 'http://localhost:5174' ,// Or use '*' to allow all origins
     credentials : true
   }));
+
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(cookieParser())
+
 
 app.use(morgan('dev'))
 mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@question.ivoisiv.mongodb.net/?retryWrites=true&w=majority&appName=question`)
@@ -37,6 +38,7 @@ mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@question.ivoisiv.mongo
 app.use('/api/users/', userRoutes)
 // question post api
 app.use('/api/questions/', questionRoutes)
+
 
 app.get('/', (req, res) => {
     return res.json({ hello: 'world' })
